@@ -1,6 +1,6 @@
 
 
-# TESLA-CLONE
+# TESLA-REACT-CLONE
 It's a complete demo React Js project.
 
 # Live Preview on https://tesla-react-clone.vercel.app/

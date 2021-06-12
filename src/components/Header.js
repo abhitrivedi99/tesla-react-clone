@@ -1,10 +1,15 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 
+import { selectCars } from './features/car/carSlice'
+
 const Header = () => {
 	const [menuStatus, setMenuStatus] = useState(false)
+	const cars = useSelector(selectCars)
 
 	return (
 		<Container>
@@ -12,10 +17,12 @@ const Header = () => {
 				<img src="/images/logo.svg" alt="tesla" />
 			</a>
 			<Menu>
-				<a href="#">Model S</a>
-				<a href="#">Model Y</a>
-				<a href="#">Model 3</a>
-				<a href="#">Model X</a>
+				{cars &&
+					cars.map((car, index) => (
+						<a key={index} href="#">
+							{car}
+						</a>
+					))}
 			</Menu>
 			<RightMenu>
 				<a href="#">Shop</a>
@@ -26,6 +33,12 @@ const Header = () => {
 				<CloseWrapper>
 					<CustomClose onClick={() => setMenuStatus(false)}></CustomClose>
 				</CloseWrapper>
+				{cars &&
+					cars.map((car, index) => (
+						<li key={index}>
+							<a href="#">{car}</a>
+						</li>
+					))}
 				<li>
 					<a href="#">Existing Inventory</a>
 				</li>
@@ -40,9 +53,6 @@ const Header = () => {
 				</li>
 				<li>
 					<a href="#">Roadster</a>
-				</li>
-				<li>
-					<a href="#">Model S</a>
 				</li>
 			</BurgerNav>
 		</Container>
